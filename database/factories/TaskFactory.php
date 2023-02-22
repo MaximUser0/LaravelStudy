@@ -19,7 +19,7 @@ class TaskFactory extends Factory
     {
         return [
             'name'=>$this->faker->text(15),
-            'card_id'=>Card::inRandomeOrder()->all()
+            'card_id'=>Card::inRandomOrder()->first()->id
         ];
     }
 }

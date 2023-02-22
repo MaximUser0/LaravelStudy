@@ -19,7 +19,7 @@ class PostFactory extends Factory
     {
         return [
             'name'=>$this->faker->text(15),
-            'desk_id'=>Desk::inRandomeOrder()->first()->all()
+            'desk_id'=>Desk::inRandomOrder()->first()->id
         ];
     }
 }

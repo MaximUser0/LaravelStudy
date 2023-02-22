@@ -19,7 +19,7 @@ class CardFactory extends Factory
     {
         return [
             'name'=>$this->faker->text(15),
-            'post_id'=>Post::inRandomeOrder()->all()
+            'post_id'=>Post::inRandomOrder()->first()->id
         ];
     }
 }

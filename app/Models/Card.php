@@ -7,5 +7,10 @@ use Illuminate\Database\Eloquent\Model;
 
 class Card extends Model
 {
+    protected $fillable = ['name', 'post_id'];
     use HasFactory;
+    public function tasks()
+    {
+        return $this->hasMany(Task::class);
+    }
 }

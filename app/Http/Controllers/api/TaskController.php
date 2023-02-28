@@ -1,15 +1,15 @@
 <?php
 
-namespace App\Http\Controllers\api;
+namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
-use App\Http\Requests\DeskStoreRequest;
-use App\Http\Resources\DeskResource;
-use App\Models\Desk;
+use App\Http\Requests\TaskStoreRequest;
+use App\Http\Resources\TaskResource;
+use App\Models\Task;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 
-class DeskController extends Controller
+class TaskController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -18,7 +18,7 @@ class DeskController extends Controller
      */
     public function index()
     {
-        return DeskResource::collection(Desk::with('posts')->get());
+        return TaskResource::collection(Task::all());
     }
 
     /**
@@ -27,10 +27,10 @@ class DeskController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(DeskStoreRequest $request)
+    public function store(TaskStoreRequest $request, Task $task)
     {
-        $created_desk = Desk::create($request->validated());
-        return new DeskResource($created_desk);
+        $created_task = $task->create($request->validated());
+        return new TaskResource($created_task);
     }
 
     /**
@@ -39,9 +39,9 @@ class DeskController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show(Desk $desk)
+    public function show(Task $task)
     {
-        return new DeskResource($desk);
+        return new TaskResource($task);
     }
 
     /**
@@ -51,10 +51,10 @@ class DeskController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(DeskStoreRequest $request, Desk $desk)
+    public function update(TaskStoreRequest $request, Task $task)
     {
-        $desk->update($request->validated());
-        return new DeskResource($desk);
+        $task->update($request->validated());
+        return new TaskResource($task);
     }
 
     /**
@@ -63,9 +63,9 @@ class DeskController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Desk $desk)
+    public function destroy(Task $task)
     {
-        $desk->delete();
+        $task->delete();
         return response(null, Response::HTTP_NO_CONTENT);
     }
 }

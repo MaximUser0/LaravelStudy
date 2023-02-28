@@ -4,7 +4,7 @@ namespace App\Http\Resources;
 
 use Illuminate\Http\Resources\Json\JsonResource;
 
-class PostResource extends JsonResource
+class CardResource extends JsonResource
 {
     /**
      * Transform the resource into an array.
@@ -17,9 +17,9 @@ class PostResource extends JsonResource
         return [
             "id"=>$this->id,
             "name"=>$this->name,
-            "desk_id"=>$this->desk_id,
+            "post_id"=>$this->post_id,
             "created_at"=>$this->created_at,
-            "cards"=>CardForPostResource::collection($this->cards),
+            "tasks"=>TaskForCardResource::collection($this->tasks),
         ];
     }
 }

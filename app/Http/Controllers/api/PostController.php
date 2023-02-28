@@ -3,13 +3,13 @@
 namespace App\Http\Controllers\api;
 
 use App\Http\Controllers\Controller;
-use App\Http\Requests\DeskStoreRequest;
-use App\Http\Resources\DeskResource;
-use App\Models\Desk;
+use App\Http\Requests\PostStoreRequest;
+use App\Http\Resources\PostResource;
+use App\Models\Post;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 
-class DeskController extends Controller
+class PostController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -18,7 +18,7 @@ class DeskController extends Controller
      */
     public function index()
     {
-        return DeskResource::collection(Desk::with('posts')->get());
+        return PostResource::collection(Post::with('cards')->get());
     }
 
     /**
@@ -27,10 +27,10 @@ class DeskController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(DeskStoreRequest $request)
+    public function store(PostStoreRequest $request)
     {
-        $created_desk = Desk::create($request->validated());
-        return new DeskResource($created_desk);
+        $created_post = Post::create($request->validated());
+        return new PostResource($created_post);
     }
 
     /**
@@ -39,9 +39,9 @@ class DeskController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show(Desk $desk)
+    public function show(Post $post)
     {
-        return new DeskResource($desk);
+        return new PostResource($post);
     }
 
     /**
@@ -51,10 +51,10 @@ class DeskController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(DeskStoreRequest $request, Desk $desk)
+    public function update(PostStoreRequest $request, Post $post)
     {
-        $desk->update($request->validated());
-        return new DeskResource($desk);
+        $post->update($request->validated());
+        return new PostResource($post);
     }
 
     /**
@@ -63,9 +63,9 @@ class DeskController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Desk $desk)
+    public function destroy(Post $post)
     {
-        $desk->delete();
+        $post->delete();
         return response(null, Response::HTTP_NO_CONTENT);
     }
 }

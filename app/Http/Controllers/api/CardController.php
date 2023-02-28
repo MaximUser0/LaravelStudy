@@ -1,15 +1,15 @@
 <?php
 
-namespace App\Http\Controllers\api;
+namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
-use App\Http\Requests\DeskStoreRequest;
-use App\Http\Resources\DeskResource;
-use App\Models\Desk;
+use App\Http\Requests\CardStoreRequest;
+use App\Http\Resources\CardResource;
+use App\Models\Card;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 
-class DeskController extends Controller
+class CardController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -18,7 +18,7 @@ class DeskController extends Controller
      */
     public function index()
     {
-        return DeskResource::collection(Desk::with('posts')->get());
+        return CardResource::collection(Card::with('tasks')->get());
     }
 
     /**
@@ -27,10 +27,10 @@ class DeskController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(DeskStoreRequest $request)
+    public function store(CardStoreRequest $request, Card $card)
     {
-        $created_desk = Desk::create($request->validated());
-        return new DeskResource($created_desk);
+        $created_card = $card->create($request->validated());
+        return new CardResource($created_card);
     }
 
     /**
@@ -39,9 +39,9 @@ class DeskController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show(Desk $desk)
+    public function show(Card $card)
     {
-        return new DeskResource($desk);
+        return new CardResource($card);
     }
 
     /**
@@ -51,10 +51,10 @@ class DeskController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(DeskStoreRequest $request, Desk $desk)
+    public function update(CardStoreRequest $request, Card $card)
     {
-        $desk->update($request->validated());
-        return new DeskResource($desk);
+        $card->update($request->validated());
+        return new CardResource($card);
     }
 
     /**
@@ -63,9 +63,9 @@ class DeskController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Desk $desk)
+    public function destroy(Card $card)
     {
-        $desk->delete();
+        $card->delete();
         return response(null, Response::HTTP_NO_CONTENT);
     }
 }

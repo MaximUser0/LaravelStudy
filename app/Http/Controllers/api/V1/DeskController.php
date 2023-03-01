@@ -18,7 +18,8 @@ class DeskController extends Controller
      */
     public function index()
     {
-        return DeskResource::collection(Desk::with('posts')->get());
+        $desks = DeskResource::collection(Desk::with('posts')->get());
+        return view('desk', compact('desks'));
     }
 
     /**

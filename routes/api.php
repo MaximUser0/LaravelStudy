@@ -1,9 +1,5 @@
 <?php
 
-use App\Http\Controllers\Api\CardController;
-use App\Http\Controllers\api\DeskController;
-use App\Http\Controllers\api\PostController;
-use App\Http\Controllers\Api\TaskController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
